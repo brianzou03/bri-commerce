@@ -1,79 +1,104 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(__TODO__: your project name)
-
-# Shoppy Shoperson 
+# Bri-Commerce (Brian's E-commerce Site)
 
 ## Overview
+Sometimes the ordinary e-commerce websites are a bit too boring. I have a simple and fun solution... Bri-Commerce!
 
-(__TODO__: a brief one or two paragraph, high-level description of your project)
-
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+Bri-Commerce is an e-commerce website that is stylistic and will allow users to have a fun e-commerce website experience. A user can register and login. Once a user is logged in, they can add items to their shopping carts. These items have descriptions, reviews, and such. Users can simulate "purchasing" items which will add these items to their inventories. Users will have a profile where they can change their profile picture, bio, and name.
 
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other) 
+The application will store Users, Carts, and Inventories
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+* users can have one cart via reference
+* useres have access to a profile page
+* each cart can have multiple items (by embedding)
+* each inventory can have multiple items (by embedding)
 
 (__TODO__: sample documents)
 
 An Example User:
+```javascript
+{
+    username: "brianzou"
+    hash: // password hash
+    cart: // the cart brianzou owns
+    inventory: // the items brianzou purchased
+    picture: // img.jpg
+    bio: // description of user
+}
+
+```
+
+An Example Cart with Embedded Items:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+    user: // reference to User object
+    name: "Brian's Cart",
+    items: [
+        { name: "xbox", price: 500, quantity: 1, },
+        { name: "protein bar", price: 30, quantity: 2}
+    ]
 }
 ```
 
-An Example List with Embedded Items:
+An Example Inventory with Embedded items:
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+    user: // reference to User object
+    name: "Brian's Inventory",
+    items: [
+        { name: "tissues", price: 10, quantity: 2, },
+        { name: "water", price: 5, quantity: 1}
+    ]
+}
+```
+
+An Example Item
+
+```javascript
+{
+    name: "Mac Laptop",
+    price: 1000,
+    rating: 5,
+    description: "Just an ordinary laptop"
 }
 ```
 
 
 ## [Link to Commented First Draft Schema](db.mjs) 
 
-(__TODO__: create a first draft of your Schemas in db.mjs and link to it)
+A link to my first draft Schema called BrianSchema (this name will probably be changed in a future iteration)
 
 ## Wireframes
 
-(__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.)
+/home - home page with items you can purchase
 
-/list/create - page for creating a new shopping list
+![list create](documentation/bricommerce_home.png)
 
-![list create](documentation/list-create.png)
+/home/item_name - page that shows an item with its review and description
 
-/list - page for showing all shopping lists
+![list](documentation/bricommerce_item.png)
 
-![list](documentation/list.png)
+/user/cart - page for your shopping cart
 
-/list/slug - page for showing specific shopping list
+![list](documentation/bricommerce_cart.png)
 
-![list](documentation/list-slug.png)
+/user/inventory - page for showing the items you purchased and own
+
+![list](documentation/bricommerce_inventory.png)
+
+/user/profile - page for showing your profile
+
+![list](documentation/bricommerce_profile.png)
+
 
 ## Site map
 
-(__TODO__: draw out a site map that shows how pages are related to each other)
+![list](documentation/bricommerce_sitemap.png)
 
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
 
 ## User Stories or Use Cases
 
