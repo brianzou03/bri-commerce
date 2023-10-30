@@ -8,21 +8,32 @@ import mongoose from 'mongoose';
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const BrianSchema = mongoose.model('BrianSchema'); // import schema from db
+app.use(express.static(path.join(__dirname, 'public')));
+
+const UserSchema = mongoose.model('UserSchema'); // import schema from db
+
 
 // configure templating to hbs
 app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 // body parser (req.body)
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-    res.render('home');
+app.get('/', async (req, res) => {
+    UserSchema.find()
+        .then(users => {
+            res.render('home', {users});
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Internal server error');
+        });
 });
 
 app.listen(process.env.PORT || 3000);
 
 // Database setup: 
 // mongosh -> use briandb
-// db.briandb.find()
-// db.briandb.insert({exampleValue: "Hello", exampleValue2: 1});
+// db.UserSchema.find()
+// db.UserSchema.insert({username: "Brian", hash: "123", cart: "potato", inventory: "null", picture: "null", bio: "null"});

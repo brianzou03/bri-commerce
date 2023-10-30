@@ -3,8 +3,16 @@
     <link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css">
 </head>
 <html>
-    <h1>Main Page</h1>
-    <body>
-        {{exampleValue}}
-    </body>
+<body>
+    <h2>Hello</h2>
+    <ul>
+        {{#each users}}
+            <li>
+                <p>Username: {{username}}</p>
+                <p>Cart: {{cart}}</p>
+                <p>Inventory: {{inventory}}</p>
+            </li>
+        {{/each}}
+    </ul>
+</body>
 </html>

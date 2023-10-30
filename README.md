@@ -21,7 +21,7 @@ An Example User:
     username: "brianzou"
     hash: // password hash
     cart: // the cart brianzou owns
-    inventory: // the items brianzou purchased
+    inventory: // the inventory brianzou owns
     picture: // img.jpg
     bio: // description of user
 }
@@ -93,6 +93,8 @@ A link to my first draft Schema called BrianSchema (this name will probably be c
 ![list](documentation/bricommerce_profile.png)
 
 
+Note: May or may not implement full implementation details such as profile page based on time constraints
+
 ## Site map
 
 ![list](documentation/bricommerce_sitemap.png)
@@ -113,17 +115,17 @@ A link to my first draft Schema called BrianSchema (this name will probably be c
 
 ## Research Topics
 
-* (6 points) React.js
-    * Using a frontend framework
-
 * (3 points) dotenv
     * Configuration management
 
 * (2 points) tailwind.css
     * Using CSS framework
 
-* (1-6 points) may use API(s)
-    * not sure what API(s) yet
+* (5 points) deploy to Amazon AWS
+    * EC2 instance?
+
+* (6 points) React.js (?)
+    * Using a frontend framework
 
 
 ## [Link to Initial Main Project File](app.mjs) 

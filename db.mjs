@@ -1,12 +1,29 @@
 import mongoose from 'mongoose';
 
+console.log(process.env.DSN);
 mongoose.connect(process.env.DSN);
 
-const BrianSchema = new mongoose.Schema({
-    exampleValue: String,
-    exampleValue2: Number
+// User Schema that contains user info
+const UserSchema = new mongoose.Schema({
+    username: String,
+    hash: String,
+    cart: String,
+    inventory: String,
+    picture: String,
+    bio: String
 });
 
-mongoose.model('BrianSchema', BrianSchema);
 
-export default BrianSchema;
+
+/*TODO: fix picture placeholder to image:
+picture: {
+            data: Buffer,
+            contentType: String
+        },
+*/
+
+// TODO: create item schema for items?
+
+mongoose.model('UserSchema', UserSchema);
+
+export default UserSchema;
