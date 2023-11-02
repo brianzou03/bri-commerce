@@ -116,16 +116,21 @@ Note: May or may not implement full implementation details such as profile page 
 ## Research Topics
 
 * (3 points) dotenv
-    * Configuration management
+    * Configuration management -> dotenv is a good practice to have so I will look more into the proper convention to incorporate dotenv into the project
 
 * (2 points) tailwind.css
-    * Using CSS framework
+    * Using CSS framework -> I heard tailwind is a good framework for CSS so I will look more into it
 
 * (5 points) deploy to Amazon AWS
-    * EC2 instance?
+    * EC2 instance (or anything more appropriate), planning to deploy for long term
+
 
 * (6 points) React.js (?)
-    * Using a frontend framework
+    * Using a frontend framework. React is a very popular library and will be great to learn.
+    * I have not used much React previously so I will apply what I learn from class and from external research to link ReactJS
+    * However, if it is not feasible I may not apply React.js to the frontend (if I have too much work on my plate to handle). I should still have sufficient points without React.js
+
+Total points: 16/10 with React.js, 10/10 without React.js
 
 
 ## [Link to Initial Main Project File](app.mjs) 
