@@ -1,13 +1,15 @@
 import mongoose from 'mongoose';
 
 console.log(process.env.DSN);
-mongoose.connect(process.env.DSN, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DSN);
 
 // User Schema that contains user info
 const UserSchema = new mongoose.Schema({
     username: String,
-    cart: String,
-    inventory: String,
+    cart: [String],
+    inventory: [String],
 });
 
-export default mongoose.model('User', UserSchema);
+mongoose.model('UserSchema', UserSchema);
+
+export default UserSchema;

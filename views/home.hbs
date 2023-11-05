@@ -9,8 +9,22 @@
         {{#each users}}
             <li>
                 <p>Username: {{username}}</p>
-                <p>Cart: {{cart}}</p>
-                <p>Inventory: {{inventory}}</p>
+                <p>Cart:</p>
+                <ul>
+                    {{#each cart}}
+                        {{#if this}}
+                            <li>{{this}}</li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+                <p>Inventory:</p>
+                <ul>
+                    {{#each inventory}}
+                        {{#if this}}
+                            <li>{{this}}</li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
                 <form action="/deleteUser/{{_id}}?_method=DELETE" method="POST">
                     <input type="submit" value="Delete User">
                 </form>
@@ -18,18 +32,16 @@
         {{/each}}
     </ul>
 
-
-
     <!-- Add a form to input user data -->
     <h2>Add a User</h2>
     <form action="/addUser" method="post">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username">
         <br>
-        <label for "cart">Cart:</label>
+        <label for "cart">Cart (comma-separated values):</label>
         <input type="text" name="cart" id="cart">
         <br>
-        <label for="inventory">Inventory:</label>
+        <label for="inventory">Inventory (comma-separated values):</label>
         <textarea name="inventory" id="inventory"></textarea>
         <br>
         <input type="submit" value="Add New User">

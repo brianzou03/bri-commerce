@@ -1,32 +1,46 @@
+import './config.mjs';
+import './db.mjs'; // Import UserSchema model
 import express from 'express'
 import methodOverride from 'method-override';
-import path from 'path'
-import { fileURLToPath } from 'url';
-import './config.mjs';
-import UserSchema from './db.mjs'; // Import UserSchema model
 import mongoose from 'mongoose';
+import url from 'url';
+import path from 'path'
+
 
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+const UserSchema = mongoose.model('UserSchema');
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 // configure templating to hbs
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
 
 // body parser (req.body)
 app.use(express.urlencoded({ extended: false }));
 
+
 // Use method-override middleware to handle the DELETE request
 app.use(methodOverride('_method'));
 
-app.get('/', async (req, res) => {
-    UserSchema.find()
+app.get('/', (req, res) => {
+    const query = {};
+    if (req.query.username){
+        query.username = req.query.username;
+    }
+    if (req.query.cart){
+        query.cart = req.query.cart;
+    }
+    if (req.query.inventory){
+        query.inventory = req.query.inventory;
+    } 
+    console.log(query);
+
+    UserSchema.find(query)
         .then(users => {
-            console.log('Found!');
-            console.log(users); // Log the 'users' array
+            console.log('Users found: ', users); // if users found
             res.render('home', { users });
         })
         .catch(error => {
@@ -54,12 +68,17 @@ app.delete('/deleteUser/:id', async (req, res) => {
 
 
 // add user
-app.post('/addUser', async (req, res) => {
+app.post('/addUser', (req, res) => {
     const { username, cart, inventory } = req.body;
+
+    // Split the comma-separated values into arrays
+    const cartArray = cart.split(',').map(item => item.trim());
+    const inventoryArray = inventory.split(',').map(item => item.trim());
+
     const newUser = new UserSchema({
         username,
-        cart,
-        inventory
+        cart: cartArray, // Assign the array
+        inventory: inventoryArray, // Assign the array
     });
 
     newUser.save()

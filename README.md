@@ -19,8 +19,8 @@ An Example User:
 ```javascript
 {
     username: "brianzou"
-    cart: // the cart brianzou owns
-    inventory: // the inventory brianzou owns
+    cart: ['String', 'array']
+    inventory: ['String', 'array']
 }
 
 ```
@@ -65,8 +65,8 @@ An Example Item
 #### Database setup: 
 * mongosh -> use briandb
 * db.dropDatabase() // to drop
-* db.UserSchema.find() // to find
-* db.UserSchema.insert({username: "Edison", cart: "money", inventory: "nada"});
+* db.users.find() // to find
+* db.users.insertOne({username: "Brian", cart: ['item1', 'item2'], inventory: ['']});
 
 
 ## [Link to Commented First Draft Schema](db.mjs) 
