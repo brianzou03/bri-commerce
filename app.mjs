@@ -35,21 +35,23 @@ app.get('/', async (req, res) => {
         });
 });
 
-// Delete user route
-app.delete('/deleteUser/:userId', async (req, res) => {
-    const userId = req.params.userId;
+app.delete('/deleteUser/:id', async (req, res) => {
+    const userId = req.params.id;
 
-    // Use the userId to delete the user from the database
-    UserSchema.findByIdAndRemove(userId, (err) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Internal server error');
-        } else {
+    try {
+        const deletedUser = await UserSchema.findByIdAndDelete(userId);
+        if (deletedUser) {
             console.log('User deleted successfully');
-            res.redirect('/');
+        } else {
+            console.log('User not found');
         }
-    });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
 });
+
 
 // add user
 app.post('/addUser', async (req, res) => {

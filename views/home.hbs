@@ -11,13 +11,14 @@
                 <p>Username: {{username}}</p>
                 <p>Cart: {{cart}}</p>
                 <p>Inventory: {{inventory}}</p>
-                <form action="/deleteUser/{{_id}}" method="POST"> <!-- Change method to POST -->
-                    <input type="hidden" name="_method" value="DELETE"> <!-- Use method-override -->
-                    <button type="submit">Delete User</button>
+                <form action="/deleteUser/{{_id}}?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete User">
                 </form>
             </li>
         {{/each}}
     </ul>
+
+
 
     <!-- Add a form to input user data -->
     <h2>Add a User</h2>
