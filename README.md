@@ -19,11 +19,8 @@ An Example User:
 ```javascript
 {
     username: "brianzou"
-    hash: // password hash
     cart: // the cart brianzou owns
     inventory: // the inventory brianzou owns
-    picture: // img.jpg
-    bio: // description of user
 }
 
 ```
@@ -64,6 +61,12 @@ An Example Item
     description: "Just an ordinary laptop"
 }
 ```
+
+#### Database setup: 
+* mongosh -> use briandb
+* db.dropDatabase() // to drop
+* db.UserSchema.find() // to find
+* db.UserSchema.insert({username: "Edison", cart: "money", inventory: "nada"});
 
 
 ## [Link to Commented First Draft Schema](db.mjs) 
@@ -133,6 +136,9 @@ Note: May or may not implement full implementation details such as profile page 
 e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123.awsdns-12.net
 6. Update the DNS records by adding a new CNAME entry with the name provided by AWS
 7. Wait about 24-48 hours for the updates to propogate, after which your website should now be hosted on AWS and visible on your domain
+
+Link to AWS deployment:
+
 
 
 

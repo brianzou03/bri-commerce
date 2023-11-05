@@ -11,8 +11,27 @@
                 <p>Username: {{username}}</p>
                 <p>Cart: {{cart}}</p>
                 <p>Inventory: {{inventory}}</p>
+                <form action="/deleteUser/{{_id}}" method="POST"> <!-- Change method to POST -->
+                    <input type="hidden" name="_method" value="DELETE"> <!-- Use method-override -->
+                    <button type="submit">Delete User</button>
+                </form>
             </li>
         {{/each}}
     </ul>
+
+    <!-- Add a form to input user data -->
+    <h2>Add a User</h2>
+    <form action="/addUser" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+        <br>
+        <label for "cart">Cart:</label>
+        <input type="text" name="cart" id="cart">
+        <br>
+        <label for="inventory">Inventory:</label>
+        <textarea name="inventory" id="inventory"></textarea>
+        <br>
+        <input type="submit" value="Add New User">
+    </form>
 </body>
 </html>
