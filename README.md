@@ -124,6 +124,17 @@ Note: May or may not implement full implementation details such as profile page 
 * (5 points) deploy to Amazon AWS
     * EC2 instance (or anything more appropriate), planning to deploy for long term
 
+#### Research on AWS: To deploy project to Amazon AWS, the following steps should be done:
+1. Via Amazon Amplify, link GitHub repo to Amplify to create a serverless app
+2. To connect to a custom domain, navigate to Route 53 and create a new hosted zone
+3. Under the hosted zone, create a new hosted zone with the respective domain
+4. Navigate to domain provider (e.g. GoDaddy.com), and update to DNS management
+5. Update your nameservers to the respective ones provided by the hosted zone on AWS
+e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123.awsdns-12.net
+6. Update the DNS records by adding a new CNAME entry with the name provided by AWS
+7. Wait about 24-48 hours for the updates to propogate, after which your website should now be hosted on AWS and visible on your domain
+
+
 
 * (6 points) React.js (?)
     * Using a frontend framework. React is a very popular library and will be great to learn.
