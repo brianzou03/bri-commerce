@@ -156,9 +156,14 @@ Total points: 16/10 with React.js, 10/10 without React.js
 
 A link to the main project file
 
+
+### Github commit to alternative origin
+git remote set-url --add --push origin https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-brianzou03.git 
+git remote set-url --add --push origin https://github.com/brianzou03/bri-commerce.git
+
 ## Annotations / References Used
 
 Placeholder:
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
+1. [AWS Amplify Deployment Documentation](https://aws.amazon.com/getting-started/guides/deploy-webapp-amplify/)
 
 
