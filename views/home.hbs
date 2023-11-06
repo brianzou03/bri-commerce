@@ -5,6 +5,7 @@
 <html>
 <body>
     <h2>Hello</h2>
+    {{#if users.length}}
     <ul>
         {{#each users}}
             <li>
@@ -31,6 +32,9 @@
             </li>
         {{/each}}
     </ul>
+    {{else}}
+        <p>No users yet</p>
+    {{/if}}
 
     <!-- Add a form to input user data -->
     <h2>Add a User</h2>

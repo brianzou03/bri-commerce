@@ -62,11 +62,13 @@ An Example Item
 }
 ```
 
-#### Database setup: 
-* mongosh -> use briandb
+#### Database setup (Mac): 
+* brew services start mongodb-community
+* mongosh
+* use finaldb
 * db.dropDatabase() // to drop
 * db.users.find() // to find
-* db.users.insertOne({username: "Brian", cart: ['item1', 'item2'], inventory: ['']});
+* db.users.insertOne({username: "Brian", cart: ['item1', 'item2'], inventory: ['item3', 'item4']});
 
 
 ## [Link to Commented First Draft Schema](db.mjs) 
