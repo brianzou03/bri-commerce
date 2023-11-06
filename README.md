@@ -139,10 +139,19 @@ e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123
 6. Update the DNS records by adding a new CNAME entry with the name provided by AWS
 7. Wait about 24-48 hours for the updates to propogate, after which your website should now be hosted on AWS and visible on your domain
 
-Link to AWS deployment:
+#### Alternatively, deploying to EC2
+1. Used commandline, following AWS commands outlined in source 2
+2. After connecting, complete installations in the command line using sudo
+3. Install necessary packages and set up Mongo
+4. Run screen permanently via "screen -d -m", "screen -d -m node app.mjs"
+5. Visit app via public ip address below
 
+#### [Link to AWS Deployment](http://54.224.147.85/)
 
+#### Proof of deployment
+![list create](documentation/bricommerce_proof1.png)
 
+![list create](documentation/bricommerce_proof2.png)
 
 * (6 points) React.js (?)
     * Using a frontend framework. React is a very popular library and will be great to learn.
@@ -157,13 +166,14 @@ Total points: 16/10 with React.js, 10/10 without React.js
 A link to the main project file
 
 
-### Github commit to alternative origin
+#### Github commit to alternative origin
 git remote set-url --add --push origin https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-brianzou03.git 
 git remote set-url --add --push origin https://github.com/brianzou03/bri-commerce.git
+
 
 ## Annotations / References Used
 
 Placeholder:
 1. [AWS Amplify Deployment Documentation](https://aws.amazon.com/getting-started/guides/deploy-webapp-amplify/)
-
+2. [EC2 Node + Mongo Deployment video](https://www.youtube.com/watch?v=7vf210p2tJg)
 
