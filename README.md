@@ -77,6 +77,8 @@ A link to my first draft Schema called BrianSchema (this name will probably be c
 
 ## Wireframes
 
+* Note that the wireframe and the completed application may be different. I will meeting the minimum requirements without necessarily implementing all of the details in the wireframe.
+
 /home - home page with items you can purchase
 
 ![list create](documentation/bricommerce_home.png)
@@ -123,13 +125,20 @@ Note: May or may not implement full implementation details such as profile page 
 * (3 points) dotenv
     * Configuration management -> dotenv is a good practice to have so I will look more into the proper convention to incorporate dotenv into the project
 
+#### Research on dotenv:
+* 
+
 * (2 points) tailwind.css
     * Using CSS framework -> I heard tailwind is a good framework for CSS so I will look more into it
+
+#### Research on tailwind.css:
+* 
+
 
 * (5 points) deploy to Amazon AWS
     * EC2 instance (or anything more appropriate), planning to deploy for long term
 
-#### Research on AWS: To deploy project to Amazon AWS, the following steps should be done:
+#### Research on AWS: To deploy project to Amazon AWS + custom domain, the following steps should be done:
 1. Via Amazon Amplify, link GitHub repo to Amplify to create a serverless app
 2. To connect to a custom domain, navigate to Route 53 and create a new hosted zone
 3. Under the hosted zone, create a new hosted zone with the respective domain
@@ -139,7 +148,7 @@ e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123
 6. Update the DNS records by adding a new CNAME entry with the name provided by AWS
 7. Wait about 24-48 hours for the updates to propogate, after which your website should now be hosted on AWS and visible on your domain
 
-#### Alternatively, deploying to EC2
+#### Alternatively, deploying an EC2 instance
 1. Used commandline, following AWS commands outlined in source 2
 2. After connecting, complete installations in the command line using sudo
 3. Install necessary packages and set up Mongo
@@ -153,13 +162,7 @@ e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123
 
 ![list create](documentation/bricommerce_proof2.png)
 
-* (6 points) React.js (?)
-    * Using a frontend framework. React is a very popular library and will be great to learn.
-    * I have not used much React previously so I will apply what I learn from class and from external research to link ReactJS
-    * However, if it is not feasible I may not apply React.js to the frontend (if I have too much work on my plate to handle). I should still have sufficient points without React.js
-
-Total points: 16/10 with React.js, 10/10 without React.js
-
+Total points: 10/10
 
 ## [Link to Initial Main Project File](app.mjs) 
 
@@ -173,7 +176,6 @@ git remote set-url --add --push origin https://github.com/brianzou03/bri-commerc
 
 ## Annotations / References Used
 
-Placeholder:
 1. [AWS Amplify Deployment Documentation](https://aws.amazon.com/getting-started/guides/deploy-webapp-amplify/)
 2. [EC2 Node + Mongo Deployment video](https://www.youtube.com/watch?v=7vf210p2tJg)
 
