@@ -10,10 +10,9 @@ Bri-Commerce is an e-commerce website that is stylistic and will allow users to 
 
 The application will store Users, Carts, and Inventories
 
-* users can have one cart via reference
-* useres have access to a profile page
-* each cart can have multiple items (by embedding)
-* each inventory can have multiple items (by embedding)
+* users can have one cart
+* each cart can have multiple items
+* each inventory can have multiple items
 
 An Example User:
 ```javascript
@@ -29,12 +28,9 @@ An Example Cart with Embedded Items:
 
 ```javascript
 {
-    user: // reference to User object
-    name: "Brian's Cart",
-    items: [
-        { name: "xbox", price: 500, quantity: 1, },
-        { name: "protein bar", price: 30, quantity: 2}
-    ]
+    username: "brianzou"
+    items: ["xbox", "tissue box"]
+    itemDescriptions: ["very expensive", "good for nose"]
 }
 ```
 
@@ -42,23 +38,9 @@ An Example Inventory with Embedded items:
 
 ```javascript
 {
-    user: // reference to User object
-    name: "Brian's Inventory",
-    items: [
-        { name: "tissues", price: 10, quantity: 2, },
-        { name: "water", price: 5, quantity: 1}
-    ]
-}
-```
-
-An Example Item
-
-```javascript
-{
-    name: "Mac Laptop",
-    price: 1000,
-    rating: 5,
-    description: "Just an ordinary laptop"
+    username: "brianzou"
+    items: ["hat", "lantern"]
+    itemDescriptions: ["nice looking hat", "very bright"]
 }
 ```
 

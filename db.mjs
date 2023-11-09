@@ -10,7 +10,22 @@ const UserSchema = new mongoose.Schema({
     inventory: [String]
 });
 
+// CartSchema that contains cart info
+const CartSchema = new mongoose.Schema({
+    username: String,
+    items: [String], 
+    itemDescriptions: [String]
+});
+
+// InventorySchema that contains cart info
+const InventorySchema = new mongoose.Schema({
+    username: String,
+    items: [String], 
+    itemDescriptions: [String]
+});
+
 mongoose.model('users', UserSchema);
+mongoose.model('carts', CartSchema);
+mongoose.model('inventories', InventorySchema);
 
-export default UserSchema;
-
+export {UserSchema, CartSchema, InventorySchema,};

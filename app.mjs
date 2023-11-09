@@ -6,7 +6,10 @@ import mongoose from 'mongoose';
 
 const app = express();
 
+// Schemas
 const UserSchema = mongoose.model('users');
+const CartSchema = mongoose.model('carts'); 
+const InventorySchema = mongoose.model('inventories');
 
 import url from 'url';
 import path from 'path'
@@ -33,7 +36,28 @@ app.get('/', (req, res) => {
             console.error(err);
             res.status(500).send('Internal server error');
         });
+    
 });
+
+
+// TODO: pull updates from AWS terminal to reflect in deployment
+
+// route handler for cart page
+app.get('/cart_page', (req, res) => {
+    // TODO: render cart schema here
+    // CartSchema.find() ... carts
+    res.render('cart_page');
+});
+
+
+//route handler for inventory page
+app.get('/inventory_page', (req, res) => {
+    // TODO: render inventory schema here
+    // InventorySchema.find() ... inventories
+    res.render('inventory_page');
+});
+
+
 
 // delete user route
 app.delete('/deleteUser/:id', async (req, res) => {
