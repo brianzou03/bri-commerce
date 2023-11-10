@@ -27,6 +27,7 @@ app.use(methodOverride('_method'));
 
 // route handler for GET to home.hbs
 app.get('/', (req, res) => {
+    // TODO: enable adding items to cart
     UserSchema.find()
         .then((users) => {
             console.log('Users found: ', users); // if users found
@@ -36,7 +37,6 @@ app.get('/', (req, res) => {
             console.error(err);
             res.status(500).send('Internal server error');
         });
-    
 });
 
 
@@ -44,17 +44,29 @@ app.get('/', (req, res) => {
 
 // route handler for cart page
 app.get('/cart_page', (req, res) => {
-    // TODO: render cart schema here
-    // CartSchema.find() ... carts
-    res.render('cart_page');
+    CartSchema.find()
+        .then((carts) => {
+            console.log('Cart found: ', carts); // if cart found
+            res.render('cart_page', { carts });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Internal server error');
+        });
 });
 
 
 //route handler for inventory page
 app.get('/inventory_page', (req, res) => {
-    // TODO: render inventory schema here
-    // InventorySchema.find() ... inventories
-    res.render('inventory_page');
+    InventorySchema.find()
+        .then((inventories) => {
+            console.log('Inventory found: ', inventories); // if inventory found
+            res.render('inventory_page', { inventories });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Internal server error');
+        });
 });
 
 
@@ -80,16 +92,11 @@ app.delete('/deleteUser/:id', async (req, res) => {
 
 // add user route
 app.post('/addUser', (req, res) => {
-    const { username, cart, inventory } = req.body;
-
-    // Split the comma-separated values into arrays
-    const cartArray = cart.split(',').map(item => item.trim());
-    const inventoryArray = inventory.split(',').map(item => item.trim());
+    const { username, bio } = req.body;
 
     const newUser = new UserSchema({
         username,
-        cart: cartArray, // Assign the array
-        inventory: inventoryArray, // Assign the array
+        bio
     });
 
     newUser.save()

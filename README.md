@@ -18,8 +18,7 @@ An Example User:
 ```javascript
 {
     username: "brianzou"
-    cart: ['String', 'array']
-    inventory: ['String', 'array']
+    bio: "A really cool guy"
 }
 
 ```
@@ -50,7 +49,16 @@ An Example Inventory with Embedded items:
 * use finaldb
 * db.dropDatabase() // to drop
 * db.users.find() // to find
-* db.users.insertOne({username: "Brian", cart: ['item1', 'item2'], inventory: ['item3', 'item4']});
+* db.users.insertOne({username: "Brian", bio: "A great guy."});
+* db.users.insertOne({username: "James", bio: "Make it double!"});
+
+* db.carts.find();
+* db.carts.insertOne({username: "Brian", items: ['apple', 'banna'], itemDescriptions: ['cool', 'bad']});
+* db.carts.insertOne({username: "James", items: ['tissue', 'pencil'], itemDescriptions: ['a', 'b']});
+
+* db.inventories.find();
+* db.inventories.insertOne({username: "Brian", items: ['grape', 'pear'], itemDescriptions: ['good', 'bad']});
+* db.inventories.insertOne({username: "James", items: ['salt', 'pepper'], itemDescriptions: ['b', 'c']});
 
 
 ## [Link to Commented First Draft Schema](db.mjs) 

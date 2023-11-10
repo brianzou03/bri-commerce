@@ -4,7 +4,7 @@
 </head>
 <html>
 <body>
-    <h2>Hello</h2>
+    <h2>Home Page</h2>
     <a href="/cart_page"><button>Cart</button></a>
     <a href="/inventory_page"><button>Inventory</button></a>
     {{#if users.length}}
@@ -12,22 +12,7 @@
         {{#each users}}
             <li>
                 <p>Username: {{username}}</p>
-                <p>Cart:</p>
-                <ul>
-                    {{#each cart}}
-                        {{#if this}}
-                            <li>{{this}}</li>
-                        {{/if}}
-                    {{/each}}
-                </ul>
-                <p>Inventory:</p>
-                <ul>
-                    {{#each inventory}}
-                        {{#if this}}
-                            <li>{{this}}</li>
-                        {{/if}}
-                    {{/each}}
-                </ul>
+                <p>Bio: {{bio}}</p>
                 <form action="/deleteUser/{{_id}}?_method=DELETE" method="POST">
                     <input type="submit" value="Delete User">
                 </form>
@@ -44,11 +29,8 @@
         <label for="username">Username:</label>
         <input type="text" name="username" id="username">
         <br>
-        <label for "cart">Cart (comma-separated values):</label>
-        <input type="text" name="cart" id="cart">
-        <br>
-        <label for="inventory">Inventory (comma-separated values):</label>
-        <textarea name="inventory" id="inventory"></textarea>
+        <label for "bio">Bio:</label>
+        <input type="text" name="bio" id="bio">
         <br>
         <input type="submit" value="Add New User">
     </form>

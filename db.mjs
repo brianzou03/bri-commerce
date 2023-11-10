@@ -6,8 +6,7 @@ mongoose.connect(process.env.DSN);
 // UserSchema that contains user info
 const UserSchema = new mongoose.Schema({
     username: String,
-    cart: [String],
-    inventory: [String]
+    bio: String
 });
 
 // CartSchema that contains cart info

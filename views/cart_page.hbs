@@ -2,10 +2,40 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css">
 </head>
+<html>
 <body>
     <h2>Cart Page</h2>
     <a href="/"><button>Home</button></a>
     <a href="/inventory_page"><button>Inventory</button></a>
+    {{#if carts.length}}
+    <ul>
+        {{#each carts}}
+            <li>
+                <p>Username: {{username}}</p>
+                <p>Items:</p>
+                <ul>
+                    {{#each items}}
+                        {{#if this}}
+                            <li>{{this}}</li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+                <p>Item Descriptions</p>
+                <ul>
+                     {{#each itemDescriptions}}
+                        {{#if this}}
+                            <li>{{this}}</li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </li>
+        {{/each}}
+    </ul>
+    {{else}}
+        <p>No items added</p>
+    {{/if}}
 
+    <!-- Add a form to input item data -->
+    
 </body>
 </html>
