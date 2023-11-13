@@ -4,6 +4,14 @@ import express from 'express';
 import methodOverride from 'method-override';
 import mongoose from 'mongoose';
 
+/* TODOs:
+1. deploy to AWS (Working)
+2. tailwind.css and .env research and implementation
+3. 2x higher order functinos
+4. stability/security
+
+*/
+
 const app = express();
 
 // Schemas

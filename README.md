@@ -117,20 +117,35 @@ Note: I have altered my final project in some of the ways from the wireframe:
 
 ## Research Topics
 
-* (3 points) dotenv
+### (2 points) dotenv
     * Configuration management -> dotenv is a good practice to have so I will look more into the proper convention to incorporate dotenv into the project
 
 #### Research on dotenv:
 * 
 
-* (2 points) tailwind.css
+### (3 points) Tailwind.CSS
     * Using CSS framework -> I heard tailwind is a good framework for CSS so I will look more into it
 
 #### Research on tailwind.css:
-* 
+Some key features of tailwind are:
+1. Utility-First: Tailwind uses utility classes to style elements. These are small, single-purpose classes that control one CSS property (like padding, margin, font size, etc.).
+2. Responsive Design: Tailwind includes responsive variants for each utility, making it easy to build responsive designs.
+3. Customization: It offers deep customization through a configuration file, allowing you to define your design system
+4. Performance: Since you use only the classes you need the final CSS bundle can be very small
 
+To get started, you want to
+```
+npm install tailwindcss
+npm install postcss-cli autoprefixer
+```
 
-* (5 points) deploy to Amazon AWS
+To build CSS, use
+```
+npx tailwindcss init
+npm run build-css
+```
+
+### (5 points) Amazon AWS
     * EC2 instance (or anything more appropriate), planning to deploy for long term
 
 #### Research on AWS: To deploy project to Amazon AWS + custom domain, the following steps should be done:
@@ -173,4 +188,5 @@ git remote set-url --add --push origin https://github.com/brianzou03/bri-commerc
 
 1. [AWS Amplify Deployment Documentation](https://aws.amazon.com/getting-started/guides/deploy-webapp-amplify/)
 2. [EC2 Node + Mongo Deployment video](https://www.youtube.com/watch?v=7vf210p2tJg)
-
+3. [Tailwind CSS documentation](https://tailwindcss.com/docs/utility-first)
+4. 

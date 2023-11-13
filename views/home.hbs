@@ -2,19 +2,18 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 </head>
-<html>
-<body>
-    <h2>Home Page</h2>
-    <a href="/cart_page"><button>Cart</button></a>
-    <a href="/inventory_page"><button>Inventory</button></a>
+<body class="bg-gray-200 text-gray-800">
+    <h2 class="text-xl font-bold mb-4">Home Page</h2>
+    <a href="/cart_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mr-2">Cart</a>
+    <a href="/inventory_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">Inventory</a>
     {{#if users.length}}
-    <ul>
+    <ul class="list-none">
         {{#each users}}
-            <li>
+            <li class="bg-gray-700 p-4 rounded mb-2">
                 <p>Username: {{username}}</p>
                 <p>Bio: {{bio}}</p>
                 <form action="/deleteUser/{{_id}}?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete User">
+                    <input type="submit" value="Delete User" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                 </form>
             </li>
         {{/each}}
@@ -23,17 +22,13 @@
         <p>No users yet</p>
     {{/if}}
 
-    <!-- Add a form to input user data -->
-    <h2>Add a User</h2>
-    <form action="/addUser" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
-        <br>
-        <label for "bio">Bio:</label>
-        <input type="text" name="bio" id="bio">
-        <br>
-        <input type="submit" value="Add New User">
+    <h2 class="text-xl font-bold mb-4">Add a User</h2>
+    <form action="/addUser" method="post" class="bg-gray-700 p-4 rounded">
+        <label for="username" class="block mb-2">Username:</label>
+        <input type="text" name="username" id="username" class="bg-gray-800 text-white p-2 rounded mb-4 w-full">
+        <label for "bio" class="block mb-2">Bio:</label>
+        <input type="text" name="bio" id="bio" class="bg-gray-800 text-white p-2 rounded mb-4 w-full">
+        <input type="submit" value="Add New User" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     </form>
-    
 </body>
 </html>

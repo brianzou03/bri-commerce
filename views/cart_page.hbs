@@ -3,18 +3,17 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 </head>
 <html>
-<body>
-    <h2>Cart Page</h2>
-    <a href="/"><button>Home</button></a>
-    <a href="/inventory_page"><button>Inventory</button></a>
-
+<body class="bg-gray-200 text-gray-800">
+    <h2 class="text-xl font-bold mb-4">Cart Page</h2>
+    <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mr-2">Home</a>
+    <a href="/inventory_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">Inventory</a>
     {{#if carts.length}}
-    <ul>
+    <ul class="list-none">
         {{#each carts}}
-            <li>
+            <li class="bg-gray-700 p-4 rounded mb-2">
                 <p>Username: {{username}}</p>
                 <p>Items:</p>
-                <ul>
+                <ul class="list-none pl-0">
                     {{#each items}}
                         {{#if this}}
                             <li>{{this}}</li>
@@ -22,16 +21,15 @@
                     {{/each}}
                 </ul>
                 <p>Item Descriptions:</p>
-                <ul>
+                <ul class="list-none pl-0">
                     {{#each itemDescriptions}}
                         {{#if this}}
                             <li>{{this}}</li>
                         {{/if}}
                     {{/each}}
                 </ul>
-                <!-- Delete button for each cart item -->
                 <form action="/deleteCartItem/{{_id}}?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete Item">
+                    <input type="submit" value="Delete Item" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                 </form>
             </li>
         {{/each}}
@@ -40,19 +38,15 @@
         <p>No items in cart</p>
     {{/if}}
 
-    <!-- Form to add items to cart -->
-    <h2>Add an Item to Cart</h2>
-    <form action="/addToCart" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
-        <br>
-        <label for="items">Item:</label>
-        <input type="text" name="items" id="items">
-        <br>
-        <label for="itemDescriptions">Item Description:</label>
-        <input type="text" name="itemDescriptions" id="itemDescriptions">
-        <br>
-        <input type="submit" value="Add Item to Cart">
+    <h2 class="text-xl font-bold mb-4">Add an Item to Cart</h2>
+    <form action="/addToCart" method="post" class="bg-gray-700 p-4 rounded">
+        <label for="username" class="block mb-2">Username:</label>
+        <input type="text" name="username" id="username" class="bg-gray-800 text-white p-2 rounded mb-4 w-full">
+        <label for="items" class="block mb-2">Item:</label>
+        <input type="text" name="items" id="items" class="bg-gray-800 text-white p-2 rounded mb-4 w-full">
+        <label for="itemDescriptions" class="block mb-2">Item Description:</label>
+        <input type="text" name="itemDescriptions" id="itemDescriptions" class="bg-gray-800 text-white p-2 rounded mb-4 w-full">
+        <input type="submit" value="Add Item to Cart" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     </form>
 </body>
 </html>
