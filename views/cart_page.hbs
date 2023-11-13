@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 </head>
 <html>
 <body>
     <h2>Cart Page</h2>
     <a href="/"><button>Home</button></a>
     <a href="/inventory_page"><button>Inventory</button></a>
+
     {{#if carts.length}}
     <ul>
         {{#each carts}}
@@ -20,22 +21,38 @@
                         {{/if}}
                     {{/each}}
                 </ul>
-                <p>Item Descriptions</p>
+                <p>Item Descriptions:</p>
                 <ul>
-                     {{#each itemDescriptions}}
+                    {{#each itemDescriptions}}
                         {{#if this}}
                             <li>{{this}}</li>
                         {{/if}}
                     {{/each}}
                 </ul>
+                <!-- Delete button for each cart item -->
+                <form action="/deleteCartItem/{{_id}}?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete Item">
+                </form>
             </li>
         {{/each}}
     </ul>
     {{else}}
-        <p>No items added</p>
+        <p>No items in cart</p>
     {{/if}}
 
-    <!-- Add a form to input item data -->
-    
+    <!-- Form to add items to cart -->
+    <h2>Add an Item to Cart</h2>
+    <form action="/addToCart" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+        <br>
+        <label for="items">Item:</label>
+        <input type="text" name="items" id="items">
+        <br>
+        <label for="itemDescriptions">Item Description:</label>
+        <input type="text" name="itemDescriptions" id="itemDescriptions">
+        <br>
+        <input type="submit" value="Add Item to Cart">
+    </form>
 </body>
 </html>

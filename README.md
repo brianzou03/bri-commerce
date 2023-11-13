@@ -77,11 +77,11 @@ A link to my first draft Schema called BrianSchema (this name will probably be c
 
 ![list](documentation/bricommerce_item.png)
 
-/user/cart - page for your shopping cart
+/user/cart_page - page for your shopping cart
 
 ![list](documentation/bricommerce_cart.png)
 
-/user/inventory - page for showing the items you purchased and own
+/user/inventory_page - page for showing the items you purchased and own
 
 ![list](documentation/bricommerce_inventory.png)
 
@@ -90,7 +90,12 @@ A link to my first draft Schema called BrianSchema (this name will probably be c
 ![list](documentation/bricommerce_profile.png)
 
 
-Note: May or may not implement full implementation details such as profile page based on time constraints
+Note: I have altered my final project in some of the ways from the wireframe:
+1. I will not be including a profile page
+2. I will not be including an item page
+3. I will not be including images with any of the items.
+4. There are other differences from the wireframe. However, I will definitely meet the minimum requirements.
+
 
 ## Site map
 

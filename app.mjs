@@ -69,9 +69,27 @@ app.get('/inventory_page', (req, res) => {
         });
 });
 
+// Route handler for adding user to home page
+app.post('/addUser', (req, res) => {
+    const { username, bio } = req.body;
 
+    const newUser = new UserSchema({
+        username,
+        bio
+    });
 
-// delete user route
+    newUser.save()
+        .then(() => {
+            console.log('User added successfully');
+            res.redirect('/');
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Internal server error');
+        });
+});
+
+// Route handler for deleting user from home page
 app.delete('/deleteUser/:id', async (req, res) => {
     const userId = req.params.id;
 
@@ -90,24 +108,83 @@ app.delete('/deleteUser/:id', async (req, res) => {
 });
 
 
-// add user route
-app.post('/addUser', (req, res) => {
-    const { username, bio } = req.body;
 
-    const newUser = new UserSchema({
+// Route handler for adding item to cart
+app.post('/addToCart', (req, res) => {
+    const { username, items, itemDescriptions } = req.body;
+
+    const newCart = new CartSchema({
         username,
-        bio
+        items,
+        itemDescriptions
     });
 
-    newUser.save()
+    newCart.save()
         .then(() => {
-            console.log('User added successfully');
-            res.redirect('/');
+            console.log('Item added to cart successfully');
+            res.redirect('/cart_page');
         })
         .catch(error => {
             console.error(error);
             res.status(500).send('Internal server error');
         });
+});
+
+// Route handler for deleting item from cart
+app.delete('/deleteCartItem/:id', async (req, res) => {
+    const cartItemId = req.params.id;
+
+    try {
+        const deletedItem = await CartSchema.findByIdAndDelete(cartItemId);
+        if (deletedItem) {
+            console.log('Cart item deleted successfully');
+        } else {
+            console.log('Cart item not found');
+        }
+        res.redirect('/cart_page');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
+
+// Route handler for adding item to inventory
+app.post('/addToInventory', (req, res) => {
+    const { username, items, itemDescriptions } = req.body;
+
+    const newInventory = new InventorySchema({
+        username,
+        items,
+        itemDescriptions
+    });
+
+    newInventory.save()
+        .then(() => {
+            console.log('Item added to inventory successfully');
+            res.redirect('/inventory_page');
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Internal server error');
+        });
+});
+
+// Route handler for deleting item from inventory
+app.delete('/deleteInventoryItem/:id', async (req, res) => {
+    const inventoryItemId = req.params.id;
+
+    try {
+        const deletedItem = await InventorySchema.findByIdAndDelete(inventoryItemId);
+        if (deletedItem) {
+            console.log('Inventory item deleted successfully');
+        } else {
+            console.log('Inventory item not found');
+        }
+        res.redirect('/inventory_page');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
 });
 
 app.listen(process.env.PORT || 3000);
