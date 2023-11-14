@@ -5,7 +5,7 @@ import methodOverride from 'method-override';
 import mongoose from 'mongoose';
 
 /* TODOs:
-1. deploy to AWS (Working)
+1. deploy to AWS, update mongodb
 2. tailwind.css and .env research and implementation
 3. 2x higher order functinos
 4. stability/security
@@ -119,12 +119,31 @@ app.delete('/deleteUser/:id', async (req, res) => {
 
 // Route handler for adding item to cart
 app.post('/addToCart', (req, res) => {
-    const { username, items, itemDescriptions } = req.body;
+    const { username, items } = req.body;
+    let { itemPrices } = req.body;
+
+    // Convert items and itemPrices into arrays
+    const itemsArray = items.split(',');
+    itemPrices = itemPrices.split(',').map(price => price.trim());
+
+    // Check if the number of items matches the number of prices
+    if (itemsArray.length !== itemPrices.length) {
+        return res.render('error', { message: 'Error: The number of items and prices must match.' });
+    }
+
+    // Validate that each itemPrice is a valid integer
+    const invalidPrice = itemPrices.find(price => isNaN(price) || !Number.isInteger(Number(price)));
+    if (invalidPrice !== undefined) {
+        return res.render('error', { message: `Error: Invalid price value '${invalidPrice}' provided. Prices must be integers.` });
+    }
+
+    // Convert itemPrices to integers
+    itemPrices = itemPrices.map(price => parseInt(price, 10));
 
     const newCart = new CartSchema({
         username,
-        items,
-        itemDescriptions
+        items: itemsArray,
+        itemPrices
     });
 
     newCart.save()
@@ -137,6 +156,7 @@ app.post('/addToCart', (req, res) => {
             res.status(500).send('Internal server error');
         });
 });
+
 
 // Route handler for deleting item from cart
 app.delete('/deleteCartItem/:id', async (req, res) => {
@@ -160,10 +180,19 @@ app.delete('/deleteCartItem/:id', async (req, res) => {
 app.post('/addToInventory', (req, res) => {
     const { username, items, itemDescriptions } = req.body;
 
+    // Convert items and itemDescriptions into arrays
+    const itemsArray = items.split(',');
+    const descriptionsArray = itemDescriptions.split(',');
+
+    // Check if the number of items matches the number of descriptions
+    if (itemsArray.length !== descriptionsArray.length) {
+        return res.render('error', { message: 'Error: The number of items and descriptions must match.' });
+    }
+
     const newInventory = new InventorySchema({
         username,
-        items,
-        itemDescriptions
+        items: itemsArray,
+        itemDescriptions: descriptionsArray
     });
 
     newInventory.save()
@@ -176,6 +205,7 @@ app.post('/addToInventory', (req, res) => {
             res.status(500).send('Internal server error');
         });
 });
+
 
 // Route handler for deleting item from inventory
 app.delete('/deleteInventoryItem/:id', async (req, res) => {

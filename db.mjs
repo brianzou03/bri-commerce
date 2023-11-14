@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
 const CartSchema = new mongoose.Schema({
     username: String,
     items: [String], 
-    itemDescriptions: [String]
+    itemPrices: [Number]
 });
 
 // InventorySchema that contains cart info

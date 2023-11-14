@@ -11,8 +11,8 @@ Bri-Commerce is an e-commerce website that is stylistic and will allow users to 
 The application will store Users, Carts, and Inventories
 
 * users can have one cart
-* each cart can have multiple items
-* each inventory can have multiple items
+* each cart can have multiple items, items will have prices
+* each inventory can have multiple items, items will have descriptions
 
 An Example User:
 ```javascript
@@ -29,7 +29,7 @@ An Example Cart with Embedded Items:
 {
     username: "brianzou"
     items: ["xbox", "tissue box"]
-    itemDescriptions: ["very expensive", "good for nose"]
+    itemPrices: ["200", "10"] // listed as a string for simplicity
 }
 ```
 
@@ -53,8 +53,8 @@ An Example Inventory with Embedded items:
 * db.users.insertOne({username: "James", bio: "Make it double!"});
 
 * db.carts.find();
-* db.carts.insertOne({username: "Brian", items: ['apple', 'banna'], itemDescriptions: ['cool', 'bad']});
-* db.carts.insertOne({username: "James", items: ['tissue', 'pencil'], itemDescriptions: ['a', 'b']});
+* db.carts.insertOne({username: "Brian", items: ['apple', 'banna'], itemPrices: [10, 20]});
+* db.carts.insertOne({username: "James", items: ['tissue', 'pencil'], itemPRices: [4, 5]});
 
 * db.inventories.find();
 * db.inventories.insertOne({username: "Brian", items: ['grape', 'pear'], itemDescriptions: ['good', 'bad']});
