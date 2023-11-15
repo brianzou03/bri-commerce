@@ -1,58 +1,68 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="/stylesheets/output.css">
 </head>
-<html>
-<body>
-    <h2>Cart Page</h2>
-    <a href="/"><button>Home</button></a>
-    <a href="/inventory_page"><button>Inventory</button></a>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-6 p-4">
+        <h2 class="text-2xl font-bold mb-4">Cart Page</h2>
+        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Home</a>
+        <a href="/inventory_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Inventory</a>
 
-    {{#if carts.length}}
-    <ul>
-        {{#each carts}}
-            <li>
-                <p>Username: {{username}}</p>
-                <p>Items:</p>
+        {{#if carts.length}}
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {{#each carts}}
+            <div class="mb-4">
+                <p class="text-gray-700 text-base mb-2">Username: {{username}}</p>
+                <p class="text-gray-700 text-base mb-2">Items:</p>
                 <ul>
                     {{#each items}}
-                        {{#if this}}
-                            <li>{{this}}</li>
-                        {{/if}}
+                    {{#if this}}
+                    <li class="list-disc list-inside">{{this}}</li>
+                    {{/if}}
                     {{/each}}
                 </ul>
-                <p>Item Prices:</p>
+                <p class="text-gray-700 text-base mb-2">Item Prices:</p>
                 <ul>
                     {{#each itemPrices}}
-                        {{#if this}}
-                            <li>{{this}}</li>
-                        {{/if}}
+                    {{#if this}}
+                    <li class="list-disc list-inside">{{this}}</li>
+                    {{/if}}
                     {{/each}}
                 </ul>
                 <!-- Delete button for each cart item -->
                 <form action="/deleteCartItem/{{_id}}?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete Item">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Item</button>
                 </form>
-            </li>
-        {{/each}}
-    </ul>
-    {{else}}
-        <p>No items in cart</p>
-    {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <p class="text-gray-700 text-base">No items in cart</p>
+        {{/if}}
 
-    <!-- Form to add items to cart -->
-    <h2>Add an Item to Cart</h2>
-    <form action="/addToCart" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
-        <br>
-        <label for="items">Item:</label>
-        <input type="text" name="items" id="items">
-        <br>
-        <label for="itemPrices">Item Prices:</label>
-        <input type="text" name="itemPrices" id="itemPrices">
-        <br>
-        <input type="submit" value="Add Item to Cart">
-    </form>
+        <!-- Form to add items to cart -->
+        <h2 class="text-2xl font-bold mb-4">Add an Item to Cart</h2>
+        <form action="/addToCart" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+                <input type="text" name="username" id="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="items" class="block text-gray-700 text-sm font-bold mb-2">Item:</label>
+                <input type="text" name="items" id="items" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="itemPrices" class="block text-gray-700 text-sm font-bold mb-2">Item Prices:</label>
+                <input type="text" name="itemPrices" id="itemPrices" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Item to Cart</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

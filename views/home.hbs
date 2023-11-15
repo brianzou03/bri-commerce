@@ -1,39 +1,48 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/stylesheets/output.css">
 </head>
-<html>
-<body>
-    <h2>Home Page</h2>
-    <a href="/cart_page"><button>Cart</button></a>
-    <a href="/inventory_page"><button>Inventory</button></a>
-    {{#if users.length}}
-    <ul>
-        {{#each users}}
-            <li>
-                <p>Username: {{username}}</p>
-                <p>Bio: {{bio}}</p>
-                <form action="/deleteUser/{{_id}}?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete User">
-                </form>
-            </li>
-        {{/each}}
-    </ul>
-    {{else}}
-        <p>No users yet</p>
-    {{/if}}
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-6 p-4">
+        <h2 class="text-2xl font-bold mb-4">Home Page</h2>
+        <a href="/cart_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Cart</a>
+        <a href="/inventory_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Inventory</a>
 
-    <!-- Add a form to input user data -->
-    <h2>Add a User</h2>
-    <form action="/addUser" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
-        <br>
-        <label for "bio">Bio:</label>
-        <input type="text" name="bio" id="bio">
-        <br>
-        <input type="submit" value="Add New User">
-    </form>
-    
+        {{#if users.length}}
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {{#each users}}
+            <div class="mb-4">
+                <p class="text-gray-700 text-base mb-2">Username: {{username}}</p>
+                <p class="text-gray-700 text-base mb-2">Bio: {{bio}}</p>
+                <form action="/deleteUser/{{_id}}?_method=DELETE" method="POST">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete User</button>
+                </form>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <p class="text-gray-700 text-base">No users yet</p>
+        {{/if}}
+
+        <!-- Add a form to input user data -->
+        <h2 class="text-2xl font-bold mb-4">Add a User</h2>
+        <form action="/addUser" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+                <input type="text" name="username" id="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="bio" class="block text-gray-700 text-sm font-bold mb-2">Bio:</label>
+                <input type="text" name="bio" id="bio" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add New User</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

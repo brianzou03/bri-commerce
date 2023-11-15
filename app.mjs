@@ -6,10 +6,8 @@ import mongoose from 'mongoose';
 
 /* TODOs:
 1. deploy to AWS, update mongodb
-2. tailwind.css and .env research and implementation
-3. 2x higher order functinos
-4. stability/security
-
+2. 2x higher order functinos
+3. stability/security
 */
 
 const app = express();

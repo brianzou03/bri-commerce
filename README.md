@@ -121,9 +121,35 @@ Note: I have altered my final project in some of the ways from the wireframe:
     * Configuration management -> dotenv is a good practice to have so I will look more into the proper convention to incorporate dotenv into the project
 
 #### Research on dotenv:
-* 
+1. .env files are associated with the dotenv package in various programming languges
+2. .env is used to manage environment variables. These are useful for separating configuration settings from application code, such as API keys, db passwords, or other secrets you don't want in public source code
+3. dotenv is a package in Node.js and other language 
+4. .env files help manage differences in development, testing, and production environments
 
-### (3 points) Tailwind.CSS
+Installation + Setup Process
+```
+npm install dotenv
+```
+
+1. Create file called .env in root directory
+2. Add environment specific variables in the form of NAME=VALUE, such as:
+
+```
+DB_HOST = localhost
+DB_USER = root
+DB_PASS = 123
+```
+
+In the context of my project, .env stores the mongodb DSN. In my local, it is localhost, while in my actual deployment it is the AWS address. To load .env, we use process.env.DB_HOST
+
+It is good practice to never commit the .env to version control. We do this by putting our .env in our gitignore file
+
+Our use cases for .env can be summarized as
+* Storing credentials: API keys, DB passwords, sensitive information
+* Configuration Settings: settings for development, testing, and production environment 
+* Feature Flags: Enable/disable features in different environments without changing the codebase
+
+### (4 points) Tailwind.CSS
     * Using CSS framework -> I heard tailwind is a good framework for CSS so I will look more into it
 
 #### Research on tailwind.css:
@@ -135,15 +161,14 @@ Some key features of tailwind are:
 
 To get started, you want to
 ```
-npm install tailwindcss
-npm install postcss-cli autoprefixer
+npm install -D tailwindcss
+npx tailwindcss init
+npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch
 ```
 
-To build CSS, use
-```
-npx tailwindcss init
-npm run build-css
-```
+We have to run the
+```npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch```
+any time we update our file to have the changes reflected in our tailwind output css file. 
 
 ### (5 points) Amazon AWS
     * EC2 instance (or anything more appropriate), planning to deploy for long term
@@ -172,7 +197,7 @@ e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123
 
 ![list create](documentation/bricommerce_proof2.png)
 
-Total points: 10/10
+Total points: 11/10
 
 ## [Link to Initial Main Project File](app.mjs) 
 
@@ -188,5 +213,10 @@ git remote set-url --add --push origin https://github.com/brianzou03/bri-commerc
 
 1. [AWS Amplify Deployment Documentation](https://aws.amazon.com/getting-started/guides/deploy-webapp-amplify/)
 2. [EC2 Node + Mongo Deployment video](https://www.youtube.com/watch?v=7vf210p2tJg)
-3. [Tailwind CSS documentation](https://tailwindcss.com/docs/utility-first)
-4. 
+3. [EC2 Setup Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html)
+4. [Tailwind CSS documentation](https://tailwindcss.com/docs/utility-first)
+5. [Tailwind VSCode setup](https://tailwindcss.com/docs/editor-setup)
+6. [dotenv documentation](https://www.npmjs.com/package/dotenv)
+7. [dotenv guide](https://medium.com/@thejasonfile/using-dotenv-package-to-create-environment-variables-33da4ac4ea8f)
+
+

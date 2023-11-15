@@ -1,58 +1,68 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Page</title>
+    <link rel="stylesheet" href="/stylesheets/output.css">
 </head>
-<html>
-<body>
-    <h2>Inventory Page</h2>
-    <a href="/"><button>Home</button></a>
-    <a href="/cart_page"><button>Cart</button></a>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-6 p-4">
+        <h2 class="text-2xl font-bold mb-4">Inventory Page</h2>
+        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Home</a>
+        <a href="/cart_page" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4">Cart</a>
 
-    {{#if inventories.length}}
-    <ul>
-        {{#each inventories}}
-            <li>
-                <p>Username: {{username}}</p>
-                <p>Items:</p>
+        {{#if inventories.length}}
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {{#each inventories}}
+            <div class="mb-4">
+                <p class="text-gray-700 text-base mb-2">Username: {{username}}</p>
+                <p class="text-gray-700 text-base mb-2">Items:</p>
                 <ul>
                     {{#each items}}
-                        {{#if this}}
-                            <li>{{this}}</li>
-                        {{/if}}
+                    {{#if this}}
+                    <li class="list-disc list-inside">{{this}}</li>
+                    {{/if}}
                     {{/each}}
                 </ul>
-                <p>Item Descriptions:</p>
+                <p class="text-gray-700 text-base mb-2">Item Descriptions:</p>
                 <ul>
                     {{#each itemDescriptions}}
-                        {{#if this}}
-                            <li>{{this}}</li>
-                        {{/if}}
+                    {{#if this}}
+                    <li class="list-disc list-inside">{{this}}</li>
+                    {{/if}}
                     {{/each}}
                 </ul>
                 <!-- Delete button for each inventory item -->
                 <form action="/deleteInventoryItem/{{_id}}?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete Item">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Item</button>
                 </form>
-            </li>
-        {{/each}}
-    </ul>
-    {{else}}
-        <p>No items in inventory</p>
-    {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <p class="text-gray-700 text-base">No items in inventory</p>
+        {{/if}}
 
-    <!-- Form to add items to inventory -->
-    <h2>Add an Item to Inventory</h2>
-    <form action="/addToInventory" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
-        <br>
-        <label for="items">Item:</label>
-        <input type="text" name="items" id="items">
-        <br>
-        <label for="itemDescriptions">Item Description:</label>
-        <input type="text" name="itemDescriptions" id="itemDescriptions">
-        <br>
-        <input type="submit" value="Add Item to Inventory">
-    </form>
+        <!-- Form to add items to inventory -->
+        <h2 class="text-2xl font-bold mb-4">Add an Item to Inventory</h2>
+        <form action="/addToInventory" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+                <input type="text" name="username" id="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="items" class="block text-gray-700 text-sm font-bold mb-2">Item:</label>
+                <input type="text" name="items" id="items" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="itemDescriptions" class="block text-gray-700 text-sm font-bold mb-2">Item Description:</label>
+                <input type="text" name="itemDescriptions" id="itemDescriptions" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Item to Inventory</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
