@@ -3,14 +3,21 @@ import './db.mjs';
 import express from 'express';
 import methodOverride from 'method-override';
 import mongoose from 'mongoose';
-
-/* TODOs:
-1. deploy to AWS, update mongodb
-2. 2x higher order functinos
-3. stability/security
-*/
+import helmet from 'helmet'; // Security middleware
+import xss from 'xss-clean'; // To clean user input
+import rateLimit from 'express-rate-limit'; // Rate limiter
 
 const app = express();
+
+app.use(helmet()); // Helmet JS for security
+
+app.use(xss()); // XSS for security
+
+// rate limit IP
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+}));
 
 // Schemas
 const UserSchema = mongoose.model('users');
@@ -18,7 +25,7 @@ const CartSchema = mongoose.model('carts');
 const InventorySchema = mongoose.model('inventories');
 
 import url from 'url';
-import path from 'path'
+import path from 'path';
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -33,7 +40,6 @@ app.use(methodOverride('_method'));
 
 // route handler for GET to home.hbs
 app.get('/', (req, res) => {
-    // TODO: enable adding items to cart
     UserSchema.find()
         .then((users) => {
             console.log('Users found: ', users); // if users found
@@ -44,9 +50,6 @@ app.get('/', (req, res) => {
             res.status(500).send('Internal server error');
         });
 });
-
-
-// TODO: pull updates from AWS terminal to reflect in deployment
 
 // route handler for cart page
 app.get('/cart_page', (req, res) => {
@@ -60,7 +63,6 @@ app.get('/cart_page', (req, res) => {
             res.status(500).send('Internal server error');
         });
 });
-
 
 //route handler for inventory page
 app.get('/inventory_page', (req, res) => {
@@ -79,9 +81,14 @@ app.get('/inventory_page', (req, res) => {
 app.post('/addUser', (req, res) => {
     const { username, bio } = req.body;
 
+    // Input validation
+    if (!username || !bio) {
+        return res.status(400).send('Username and bio are required');
+    }
+
     const newUser = new UserSchema({
-        username,
-        bio
+        username: username.trim(), // Trim inputs
+        bio: bio.trim()
     });
 
     newUser.save()
@@ -94,26 +101,6 @@ app.post('/addUser', (req, res) => {
             res.status(500).send('Internal server error');
         });
 });
-
-// Route handler for deleting user from home page
-app.delete('/deleteUser/:id', async (req, res) => {
-    const userId = req.params.id;
-
-    try {
-        const deletedUser = await UserSchema.findByIdAndDelete(userId);
-        if (deletedUser) {
-            console.log('User deleted successfully');
-        } else {
-            console.log('User not found');
-        }
-        res.redirect('/');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
-    }
-});
-
-
 
 // Route handler for adding item to cart
 app.post('/addToCart', (req, res) => {
@@ -139,8 +126,8 @@ app.post('/addToCart', (req, res) => {
     itemPrices = itemPrices.map(price => parseInt(price, 10));
 
     const newCart = new CartSchema({
-        username,
-        items: itemsArray,
+        username: username.trim(), // Trim inputs
+        items: itemsArray.map(item => item.trim()), // Trim each item
         itemPrices
     });
 
@@ -155,6 +142,58 @@ app.post('/addToCart', (req, res) => {
         });
 });
 
+// Route handler for adding item to inventory
+app.post('/addToInventory', (req, res) => {
+    const { username, items, itemDescriptions } = req.body;
+
+    // Input validation
+    if (!username || !items || !itemDescriptions) {
+        return res.status(400).send('Username, items, and descriptions are required');
+    }
+
+    // Convert items and itemDescriptions into arrays
+    const itemsArray = items.split(',');
+    const descriptionsArray = itemDescriptions.split(',');
+
+    // Check if the number of items matches the number of descriptions
+    if (itemsArray.length !== descriptionsArray.length) {
+        return res.render('error', { message: 'Error: The number of items and descriptions must match.' });
+    }
+
+    const newInventory = new InventorySchema({
+        username: username.trim(), // Trim inputs
+        items: itemsArray.map(item => item.trim()), // Trim each item
+        itemDescriptions: descriptionsArray.map(desc => desc.trim()) // Trim each description
+    });
+
+    newInventory.save()
+        .then(() => {
+            console.log('Item added to inventory successfully');
+            res.redirect('/inventory_page');
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Internal server error');
+        });
+});
+
+// Route handler for deleting user from home page
+app.delete('/deleteUser/:id', async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const deletedUser = await UserSchema.findByIdAndDelete(userId);
+        if (deletedUser) {
+            console.log('User deleted successfully');
+        } else {
+            console.log('User not found');
+        }
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 // Route handler for deleting item from cart
 app.delete('/deleteCartItem/:id', async (req, res) => {
@@ -173,37 +212,6 @@ app.delete('/deleteCartItem/:id', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
-
-// Route handler for adding item to inventory
-app.post('/addToInventory', (req, res) => {
-    const { username, items, itemDescriptions } = req.body;
-
-    // Convert items and itemDescriptions into arrays
-    const itemsArray = items.split(',');
-    const descriptionsArray = itemDescriptions.split(',');
-
-    // Check if the number of items matches the number of descriptions
-    if (itemsArray.length !== descriptionsArray.length) {
-        return res.render('error', { message: 'Error: The number of items and descriptions must match.' });
-    }
-
-    const newInventory = new InventorySchema({
-        username,
-        items: itemsArray,
-        itemDescriptions: descriptionsArray
-    });
-
-    newInventory.save()
-        .then(() => {
-            console.log('Item added to inventory successfully');
-            res.redirect('/inventory_page');
-        })
-        .catch(error => {
-            console.error(error);
-            res.status(500).send('Internal server error');
-        });
-});
-
 
 // Route handler for deleting item from inventory
 app.delete('/deleteInventoryItem/:id', async (req, res) => {
@@ -224,4 +232,3 @@ app.delete('/deleteInventoryItem/:id', async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000);
-

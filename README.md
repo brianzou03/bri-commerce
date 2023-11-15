@@ -208,6 +208,18 @@ A link to the main project file
 git remote set-url --add --push origin https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-brianzou03.git 
 git remote set-url --add --push origin https://github.com/brianzou03/bri-commerce.git
 
+#### Additional notes:
+(4 points) minimum 2 x any of the following (can be the same): ...
+or use any of these built-in higher order functions found in Array.prototype: map, reduce, filter
+I use map twice in app.mjs
+
+
+(8 points) stability / security
+simple validation on user input to prevent application from crashing
+doesn't allow user input to be displayed unescaped directly on page
+pages that require authentication cannot be accessed without authentication
+data specified as private to a user cannot be viewed by another user
+etc.
 
 ## Annotations / References Used
 
