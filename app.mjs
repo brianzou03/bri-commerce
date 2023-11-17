@@ -8,10 +8,17 @@ import xss from 'xss-clean'; // To clean user input
 import rateLimit from 'express-rate-limit'; // Rate limiter
 import cors from "cors";
 import fs from "fs";
+import https from "https";
 
-const file = fs.readFileSync('./68C43A09BA45144F46E25271E0A1BDBF.txt');
+const key = fs.readFileSync('private.key');
+const cert = fs.readFileSync('certificate.crt');
 
 const app = express();
+
+const cred = {
+    key,
+    cert
+};
 
 app.use(cors());
 app.use(helmet()); // Helmet JS for security
@@ -47,10 +54,12 @@ function logData(message, data) {
     console.log(message, JSON.stringify(data, null, 2));
 }
 
+/*
 // ZeroSSL auth file
 app.get('/.well-known/pki-validation/68C43A09BA45144F46E25271E0A1BDBF.txt', (req, res) => {
     res.sendFile('');
 });
+*/
 
 // route handler for GET to home.hbs
 app.get('/', (req, res) => {
@@ -244,3 +253,6 @@ app.delete('/deleteInventoryItem/:id', async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000);
+
+const httpsServer = https.createServer(cred, app);
+httpsServer.listen(8443);
