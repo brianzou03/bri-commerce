@@ -10,8 +10,15 @@ import cors from "cors";
 import fs from "fs";
 import https from "https";
 
+/*
 const key = fs.readFileSync('private.key');
 const cert = fs.readFileSync('certificate.crt');
+*/
+
+const key = process.env.PRIVATEKEY;
+const cert = process.env.CERTIFICATE;
+console.log(key)
+console.log(cert)
 
 const app = express();
 
