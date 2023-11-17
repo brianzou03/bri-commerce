@@ -17,8 +17,8 @@ const cert = fs.readFileSync('certificate.crt');
 
 const key = process.env.PRIVATEKEY;
 const cert = process.env.CERTIFICATE;
-console.log(key)
-console.log(cert)
+// console.log(key)
+// console.log(cert)
 
 const app = express();
 

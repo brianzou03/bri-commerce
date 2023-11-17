@@ -3,18 +3,20 @@
 ## Overview
 Sometimes the ordinary e-commerce websites are a bit too boring. I have a simple and fun solution... Bri-Commerce!
 
-Bri-Commerce is an e-commerce website that is stylistic and will allow users to have a fun e-commerce website experience. A user can register and login. Once a user is logged in, they can add items to their shopping carts. These items have descriptions, reviews, and such. Users can simulate "purchasing" items which will add these items to their inventories. Users will have a profile where they can change their profile picture, bio, and name.
+Bri-Commerce is an e-commerce website that allows a user to add their username and bio. Users can also add their carts, which contain items and prices. Users can also add their inventories, which contain items and their descriptions.
 
 
 ## Data Model
 
 The application will store Users, Carts, and Inventories
 
-* users can have one cart
+* useres will have a corresponding bio
 * each cart can have multiple items, items will have prices
+* each cart is also listed under a username
 * each inventory can have multiple items, items will have descriptions
+* each inventory is also listed under a username
 
-An Example User:
+An Example User
 ```javascript
 {
     username: "brianzou"
@@ -23,17 +25,17 @@ An Example User:
 
 ```
 
-An Example Cart with Embedded Items:
+An Example Cart with Items
 
 ```javascript
 {
     username: "brianzou"
     items: ["xbox", "tissue box"]
-    itemPrices: ["200", "10"] // listed as a string for simplicity
+    itemPrices: [500, 5]
 }
 ```
 
-An Example Inventory with Embedded items:
+An Example Inventory with Items
 
 ```javascript
 {
@@ -61,31 +63,29 @@ An Example Inventory with Embedded items:
 * db.inventories.insertOne({username: "James", items: ['salt', 'pepper'], itemDescriptions: ['b', 'c']});
 
 
-## [Link to Commented First Draft Schema](db.mjs) 
-
-A link to my first draft Schema called BrianSchema (this name will probably be changed in a future iteration)
+## [Link to Schemas](db.mjs) 
 
 ## Wireframes
 
 * Note that the wireframe and the completed application may be different. I will meeting the minimum requirements without necessarily implementing all of the details in the wireframe.
 
-/home - home page with items you can purchase
+/ - home page with items you can purchase (home page does not contain imagesm instead it allows a user to add their username, and their bio)
 
 ![list create](documentation/bricommerce_home.png)
 
-/home/item_name - page that shows an item with its review and description
-
-![list](documentation/bricommerce_item.png)
-
-/user/cart_page - page for your shopping cart
+/cart_page - page for your shopping cart (images not in finalized version of project, Schema also different)
 
 ![list](documentation/bricommerce_cart.png)
 
-/user/inventory_page - page for showing the items you purchased and own
+/inventory_page - page for showing the items you purchased and own (images not in finalized version of project, Schema also different)
 
 ![list](documentation/bricommerce_inventory.png)
 
-/user/profile - page for showing your profile
+/item_name - page that shows an item with its review and description (This is not included in the finalized version of my project)
+
+![list](documentation/bricommerce_item.png)
+
+/profile - page for showing your profile (This is not included in the finalized version of my project)
 
 ![list](documentation/bricommerce_profile.png)
 
@@ -94,31 +94,27 @@ Note: I have altered my final project in some of the ways from the wireframe:
 1. I will not be including a profile page
 2. I will not be including an item page
 3. I will not be including images with any of the items.
-4. There are other differences from the wireframe. However, I will definitely meet the minimum requirements.
+4. The Schemas are different as well
+5. There are other differences from the wireframe. However, I have reached the minimum requirements for the project.
 
 
 ## Site map
 
 ![list](documentation/bricommerce_sitemap.png)
 
+Note that the site map is different from the final project, where the home page, cart_page, and inventory_page are on the same level, and the other pages (item page and profile page) are not included.
 
 ## User Stories or Use Cases
-
-1. as a non-registered user, I can register a new account on the site
-2. as a user, I can log into the website
-3. as a user, I can add items to my shopping cart
-4. as a user, I can view an item's page with review and description
-5. as a user, I can review an item
-6. as a user, I can view my shopping cart with the items I added
-7. as a user, I can "purchase" the items from my shopping cart, moving them to my inventory
-8. as a user, I can view my inventory with the items I bought
-9. as a user, I can modify my own profile page with an image and a bio
-10. as a user, I can view my own profile page
+1. as a user, I can add a username and a bio
+2. as a user, I can access a cart_page and inventory_page
+3. as a user, I can add items to a cart with respective values
+4. as a user, I can add items to an inventory with respective descriptions
+5. as a user, I can remove a cart
+6. as a user, I can remove an inventory
 
 ## Research Topics
 
 ### (2 points) dotenv
-    * Configuration management -> dotenv is a good practice to have so I will look more into the proper convention to incorporate dotenv into the project
 
 #### Research on dotenv:
 1. .env files are associated with the dotenv package in various programming languges
@@ -149,8 +145,7 @@ Our use cases for .env can be summarized as
 * Configuration Settings: settings for development, testing, and production environment 
 * Feature Flags: Enable/disable features in different environments without changing the codebase
 
-### (4 points) Tailwind.CSS
-    * Using CSS framework -> I heard tailwind is a good framework for CSS so I will look more into it
+### (3 points) Tailwind.CSS
 
 #### Research on tailwind.css:
 Some key features of tailwind are:
@@ -171,7 +166,6 @@ We have to run the
 any time we update our file to have the changes reflected in our tailwind output css file. 
 
 ### (5 points) Amazon AWS
-    * EC2 instance (or anything more appropriate), planning to deploy for long term
 
 #### Research on AWS: To deploy project to Amazon AWS + custom domain, the following steps should be done:
 1. Via Amazon Amplify, link GitHub repo to Amplify to create a serverless app
@@ -183,47 +177,31 @@ e.g. ns-1234.awsdns-12.org, ns-12.awsdns-12.com, ns-1234.awsdns-12.co.uk, ns-123
 6. Update the DNS records by adding a new CNAME entry with the name provided by AWS
 7. Wait about 24-48 hours for the updates to propogate, after which your website should now be hosted on AWS and visible on your domain
 
-#### Alternatively, deploying an EC2 instance
+#### Alternatively, deploying an EC2 instance (This is what I went with)
 1. Used commandline, following AWS commands outlined in source 2
 2. After connecting, complete installations in the command line using sudo
 3. Install necessary packages and set up Mongo
-4. Run screen permanently via "screen -d -m", "screen -d -m node app.mjs"
+4. Run pm2 start app.mjs (after npm install pm2 -g)
 5. Visit app via public ip address below
 
-#### [Link to AWS Deployment](http://54.224.147.85/)
+#### HTTPS Setup
+1. To add an SSL, I used ZeroSSL along with the setup guide provided in source 8
+2. I first needed to verify my domain, done by creating a route to a text file
+3. After which, I received my certificate and a private key
+4. I added the certificate and private key to the .env file so that they are not committed to the github
+5. Afterwards, I added a credentials object and an https server that listens on port 8443
 
-#### Proof of deployment
-![list create](documentation/bricommerce_proof1.png)
+#### [Link to AWS Deployment](https://54.224.147.85/)
 
-![list create](documentation/bricommerce_proof2.png)
-
-Total points: 11/10
-
-## [Link to Initial Main Project File](app.mjs) 
-
-A link to the main project file
+Total points: 10/10
 
 
-#### Github commit to alternative origin
+## [Link to Main Project File](app.mjs) 
+
+
+## Github commit to alternative origin
 git remote set-url --add --push origin https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-brianzou03.git 
 git remote set-url --add --push origin https://github.com/brianzou03/bri-commerce.git
-
-#### Additional notes:
-(4 points) minimum 2 x any of the following (can be the same): ...
-or use any of these built-in higher order functions found in Array.prototype: map, reduce, filter
-I use map twice in app.mjs
-
-
-(8 points) stability / security
-simple validation on user input to prevent application from crashing
-doesn't allow user input to be displayed unescaped directly on page
-pages that require authentication cannot be accessed without authentication
-data specified as private to a user cannot be viewed by another user
-etc.
-
-
-
-npm install pm2 -g
 
 ## Annotations / References Used
 
@@ -234,5 +212,4 @@ npm install pm2 -g
 5. [Tailwind VSCode setup](https://tailwindcss.com/docs/editor-setup)
 6. [dotenv documentation](https://www.npmjs.com/package/dotenv)
 7. [dotenv guide](https://medium.com/@thejasonfile/using-dotenv-package-to-create-environment-variables-33da4ac4ea8f)
-
-
+8. [HTTPS certificate with Node to EC2](https://www.youtube.com/watch?v=q-XEGbipOVw)
