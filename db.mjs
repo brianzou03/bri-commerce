@@ -1,8 +1,5 @@
 import mongoose from 'mongoose';
 
-console.log(process.env.DSN);
-mongoose.connect(process.env.DSN);
-
 // UserSchema that contains user info
 const UserSchema = new mongoose.Schema({
     username: String,
@@ -26,5 +23,8 @@ const InventorySchema = new mongoose.Schema({
 mongoose.model('users', UserSchema);
 mongoose.model('carts', CartSchema);
 mongoose.model('inventories', InventorySchema);
+
+console.log(process.env.DSN);
+mongoose.connect(process.env.DSN);
 
 export {UserSchema, CartSchema, InventorySchema,};

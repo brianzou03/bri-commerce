@@ -6,9 +6,27 @@ import mongoose from 'mongoose';
 import helmet from 'helmet'; // Security middleware
 import xss from 'xss-clean'; // To clean user input
 import rateLimit from 'express-rate-limit'; // Rate limiter
-
+import spdy from "spdy";
+import * as fs from "fs";
+import * as Http from "http";
 
 const app = express();
+
+function envParam(key, defaultValue = undefined) {
+    if (process.env[key.toUpperCase()] === undefined) {
+        // noinspection ExceptionCaughtLocallyJS
+        console.log(`Config key "${key}" not present!`);
+
+        if(defaultValue === undefined) {
+            throw new Error(`invalid_config_key: ${key.toUpperCase()}`);
+        }
+        else {
+            return defaultValue;
+        }
+    }
+
+    return process.env[key.toUpperCase()];
+}
 
 app.use(helmet()); // Helmet JS for security
 app.use(xss()); // XSS for security
@@ -26,6 +44,7 @@ const InventorySchema = mongoose.model('inventories');
 
 import url from 'url';
 import path from 'path';
+import * as dotenv from "dotenv";
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -234,5 +253,25 @@ app.delete('/deleteInventoryItem/:id', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT || 3000);
+// Auto-switch between HTTP and HTTPS
+let server;
 
+try {
+    server = spdy.createServer({
+        key: fs.readFileSync(envParam("priv_key","")),
+        cert: fs.readFileSync(envParam("full_key",""))
+    }, app);
+
+}
+catch (e) {
+    console.log(e);
+    console.log("either priv_key or full_key is invalid or not set in ENV. Falling back to HTTP...");
+    server = Http.createServer(app);
+}
+finally {
+    const port = process.env.PORT || 3000;
+
+    server.listen(port,() => {
+        console.log("Server is listening at port " + port);
+    });
+}

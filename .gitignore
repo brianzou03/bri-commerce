@@ -1,5 +1,7 @@
 node_modules
 *.swo
 *.swp
-
 .env
+**/.DS_Store
+.idea
+creds
