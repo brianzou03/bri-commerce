@@ -7,6 +7,7 @@ import helmet from 'helmet'; // Security middleware
 import xss from 'xss-clean'; // To clean user input
 import rateLimit from 'express-rate-limit'; // Rate limiter
 
+
 const app = express();
 
 app.use(helmet()); // Helmet JS for security

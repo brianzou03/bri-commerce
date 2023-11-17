@@ -221,6 +221,10 @@ pages that require authentication cannot be accessed without authentication
 data specified as private to a user cannot be viewed by another user
 etc.
 
+
+
+npm install pm2 -g
+
 ## Annotations / References Used
 
 1. [AWS Amplify Deployment Documentation](https://aws.amazon.com/getting-started/guides/deploy-webapp-amplify/)
